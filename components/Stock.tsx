@@ -2,6 +2,21 @@
 import { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import config from "../config/config.json";
+import {
+  useFonts,
+  // Roboto_100Thin,
+  // Roboto_100Thin_Italic,
+  // Roboto_300Light,
+  // Roboto_300Light_Italic,
+  Roboto_400Regular,
+  // Roboto_400Regular_Italic,
+  // Roboto_500Medium,
+  // Roboto_500Medium_Italic,
+  // Roboto_700Bold,
+  // Roboto_700Bold_Italic,
+  // Roboto_900Black,
+  // Roboto_900Black_Italic
+} from '@expo-google-fonts/roboto'
 
 function StockList() {
   const [products, setProducts] = useState([]);
@@ -12,8 +27,13 @@ function StockList() {
       .then(result => setProducts(result.data));
   }, []);
 
-  const list = products.map((product, index) => <Text key={index} > {product.name} - {product.stock}</Text >);
+  let [fontsLoaded] = useFonts({
+    Roboto_400Regular
+  }); if (!fontsLoaded) {
+    return <></>;
+  }
 
+  const list = products.map((product, index) => <Text style={styles.stocklist} key={index} > {product.name} - {product.stock}</Text >);
   return (
     <View>
       {list}
@@ -25,8 +45,18 @@ const styles = StyleSheet.create({
   stock: {
     color: '#45062e',
     fontSize: 26,
+    fontFamily: 'Roboto_400Regular',
     marginTop: 10,
+
   },
+  stocklist: {
+    color: '#45062e',
+    fontFamily: 'Roboto_400Regular',
+    marginTop: 10,
+    fontSize: 16,
+    lineHeight: 16,
+    letterSpacing: 1.4,
+  }
 });
 
 export default function Stock() {
