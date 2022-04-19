@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import config from "../config/config.json";
+import productModel from "../models/products";
+import { Base, Typography } from '../styles';
 import {
   useFonts,
   // Roboto_100Thin,
@@ -18,14 +20,19 @@ import {
   // Roboto_900Black_Italic
 } from '@expo-google-fonts/roboto'
 
-function StockList() {
-  const [products, setProducts] = useState([]);
+function StockList({ products, setProducts }) {
+  // const [products, setProducts] = useState<any[]>([]);
 
-  useEffect(() => {
-    fetch(`${config.base_url}/products?api_key=${config.api_key}`)
-      .then(response => response.json())
-      .then(result => setProducts(result.data));
+  useEffect(async () => {
+    setProducts(await productModel.getProducts());
   }, []);
+
+
+  // useEffect(() => {
+  //   fetch(`${config.base_url}/products?api_key=${config.api_key}`)
+  //     .then(response => response.json())
+  //     .then(result => setProducts(result.data));
+  // }, []);
 
   let [fontsLoaded] = useFonts({
     Roboto_400Regular
@@ -33,7 +40,15 @@ function StockList() {
     return <></>;
   }
 
-  const list = products.map((product, index) => <Text style={styles.stocklist} key={index} > {product.name} - {product.stock}</Text >);
+  // const list = products.map((product, index) => <Text style={styles.stocklist} key={index} > {product.name} - {product.stock}</Text >);
+  const list = products.map((product, index) => {
+    return <Text
+      key={index}
+      style={{ ...Typography.normal }}
+    >
+      {product.name} - {product.stock}
+    </Text>
+  });
   return (
     <View>
       {list}
@@ -59,11 +74,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function Stock() {
+export default function Stock({ products, setProducts }) {
   return (
     <View>
       <Text style={styles.stock}>Lagerförteckning</Text>
-      <StockList />
+      <StockList products={products} setProducts={setProducts} />
     </View>
   );
 }

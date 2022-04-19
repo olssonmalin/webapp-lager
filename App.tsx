@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   useFonts,
@@ -16,10 +17,24 @@ import {
   // Roboto_900Black,
   // Roboto_900Black_Italic
 } from '@expo-google-fonts/roboto'
-import candy from './assets/klubba.jpg';
 import Stock from './components/Stock.tsx';
+import Home from './components/Home.tsx';
+import Pick from './components/Pick.tsx';
+import { Ionicons } from '@expo/vector-icons';
+import { Base, Typography } from './styles';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
+const routeIcons = {
+  "Lager": "home",
+  "Plock": "list",
+};
 
 export default function App() {
+  const [products, setProducts] = useState<any[]>([]);
+
   let [fontsLoaded] = useFonts({
     Roboto_400Regular,
     Roboto_500Medium
@@ -27,30 +42,34 @@ export default function App() {
     return <></>;
   }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.base}>
-        <Text style={{ color: '#45062e', fontSize: 42, fontFamily: 'Roboto_500Medium', letterSpacing: 1.2, marginBottom: 5, marginTop: 5 }}>Lager-Appen</Text>
+  {/* <Text style={{ color: '#45062e', fontSize: 42, fontFamily: 'Roboto_500Medium', letterSpacing: 1.2, marginBottom: 5, marginTop: 5 }}>Lager-Appen</Text>
         <Image source={candy} style={{ width: 420, height: 190 }} />
-        <StatusBar style="auto" />
-        <Stock />
-      </View>
-    </SafeAreaView>
+        <Stock /> */}
+
+  return (
+    <SafeAreaView style={Base.base}>
+      <Text style={Typography.header1}>Lager-Appen</Text>
+      <NavigationContainer >
+        <Tab.Navigator screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName = routeIcons[route.name] || "alert";
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+          headerShown: false,
+        })}
+        >
+          <Tab.Screen name="Lager">
+            {() => <Home products={products} setProducts={setProducts} />}
+          </Tab.Screen>
+          <Tab.Screen name="Plock">
+            {() => <Pick products={products} setProducts={setProducts} />}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer>
+      <StatusBar style="auto" />
+    </SafeAreaView >
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffd5d7',
-  },
-  base: {
-    flex: 1,
-    backgroundColor: '#ffd5d7',
-    paddingLeft: 12,
-    paddingRight: 12,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  }
-});
