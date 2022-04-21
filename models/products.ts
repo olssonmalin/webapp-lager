@@ -9,14 +9,21 @@ const products = {
 
         return result.data;
 
-        // const result = fetch(`${config.base_url}/products?api_key=${config.api_key}`)
-        //     .then(function (response) {
-        //         return response.json();
-        //     }).then(function (data) {
+    },
 
-        //     });
+    updateProduct: async function updateProduct(productInfo) {
+        productInfo.api_key = config.api_key;
 
-        // return result;
+        fetch(`${config.base_url}/products`, {
+            body: JSON.stringify(productInfo),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        })
+            .then(function (response) {
+
+            });
     },
 };
 

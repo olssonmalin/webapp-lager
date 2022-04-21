@@ -25,3 +25,8 @@ export const normal = {
     marginBottom: 28,
     color: '#45062e'
 };
+
+export const label = {
+    fontWeight: 'bold',
+    color: '#45062e'
+};

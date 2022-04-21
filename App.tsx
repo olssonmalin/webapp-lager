@@ -17,9 +17,11 @@ import {
   // Roboto_900Black,
   // Roboto_900Black_Italic
 } from '@expo-google-fonts/roboto'
-import Stock from './components/Stock.tsx';
-import Home from './components/Home.tsx';
-import Pick from './components/Pick.tsx';
+import Stock from './components/Stock';
+import Home from './components/Home';
+import Pick from './components/Pick';
+import Deliveries from './components/Deliveries';
+
 import { Ionicons } from '@expo/vector-icons';
 import { Base, Typography } from './styles';
 
@@ -66,6 +68,9 @@ export default function App() {
           </Tab.Screen>
           <Tab.Screen name="Plock">
             {() => <Pick products={products} setProducts={setProducts} />}
+          </Tab.Screen>
+          <Tab.Screen name="Leverans">
+            {() => <Deliveries products={products} setProducts={setProducts} />}
           </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>
