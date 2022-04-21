@@ -36,6 +36,8 @@ const routeIcons = {
 
 export default function App() {
   const [products, setProducts] = useState<any[]>([]);
+  const [deliveries, setDeliveries] = useState<any[]>([]);
+
 
   let [fontsLoaded] = useFonts({
     Roboto_400Regular,
@@ -70,7 +72,7 @@ export default function App() {
             {() => <Pick products={products} setProducts={setProducts} />}
           </Tab.Screen>
           <Tab.Screen name="Leverans">
-            {() => <Deliveries products={products} setProducts={setProducts} />}
+            {() => <Deliveries products={products} setProducts={setProducts} deliveries={deliveries} setDeliveries={setDeliveries} />}
           </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>

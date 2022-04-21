@@ -5,6 +5,8 @@ import { Base, Typography, Forms } from '../styles';
 import Delivery from '../interfaces/delivery';
 import { Picker } from '@react-native-picker/picker';
 import productModel from "../models/products";
+import deliveryModel from "../models/deliveries";
+
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -72,7 +74,7 @@ export default function DeliveryForm({ navigation, setProducts }) {
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
     async function addDelivery() {
-        // await deliveryModel.addDelivery(delivery);
+        await deliveryModel.addDelivery(delivery);
 
         const updatedProduct = {
             ...currentProduct,
@@ -84,7 +86,6 @@ export default function DeliveryForm({ navigation, setProducts }) {
         navigation.navigate("List", { reload: true });
     }
 
-    // console.log(delivery);
     return (
         <ScrollView style={{ ...Base.base }}>
             <Text style={{ ...Typography.header2 }}>Ny inleverans</Text>

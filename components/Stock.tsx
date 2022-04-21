@@ -21,7 +21,6 @@ import {
 } from '@expo-google-fonts/roboto'
 
 function StockList({ products, setProducts }) {
-  // const [products, setProducts] = useState<any[]>([]);
 
   useEffect(async () => {
     setProducts(await productModel.getProducts());

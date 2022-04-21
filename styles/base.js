@@ -19,3 +19,11 @@ export const pickList = {
     backgroundColor: '#ffd5d7'
 };
 
+export const delivery = {
+    marginTop: 25,
+};
+
+export const button = {
+    color: '#00b4d8',
+    fontWeight: 800
+};
