@@ -35,6 +35,7 @@ function DateDropDown(props) {
 
                         setShow(false);
                     }}
+                    style={{ ...Forms.input }}
                     value={dropDownDate}
                 />
             )}
@@ -90,6 +91,13 @@ export default function DeliveryForm({ navigation, setProducts }) {
         <ScrollView style={{ ...Base.base }}>
             <Text style={{ ...Typography.header2 }}>Ny inleverans</Text>
 
+            <Text style={{ ...Typography.label }}>Produkt</Text>
+            <ProductDropDown
+                delivery={delivery}
+                setDelivery={setDelivery}
+                setCurrentProduct={setCurrentProduct}
+            />
+
             <Text style={{ ...Typography.label }}>Antal</Text>
             <TextInput
                 style={{ ...Forms.input }}
@@ -109,12 +117,6 @@ export default function DeliveryForm({ navigation, setProducts }) {
                 value={delivery?.comment}
             />
 
-            <Text style={{ ...Typography.label }}>Produkt</Text>
-            <ProductDropDown
-                delivery={delivery}
-                setDelivery={setDelivery}
-                setCurrentProduct={setCurrentProduct}
-            />
 
             <Text style={{ ...Typography.label }}>Datum</Text>
             <DateDropDown

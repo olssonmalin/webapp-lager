@@ -24,6 +24,7 @@ export const delivery = {
 };
 
 export const button = {
-    color: '#00b4d8',
-    fontWeight: 800
+    borderStyle: 'solid',
+    borderColor: "#45062e",
+    borderRadius: 3,
 };

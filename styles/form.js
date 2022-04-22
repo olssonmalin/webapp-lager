@@ -8,6 +8,6 @@ export const input = {
     marginBottom: 28,
     borderWidth: 1,
     padding: 10,
-    borderColor: "#ccc",
+    borderColor: "#45062e",
     borderRadius: 3,
 };
