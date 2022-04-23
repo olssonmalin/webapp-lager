@@ -23,6 +23,21 @@ export default function DeliveriesList({ route, navigation, setProducts, setDeli
                 key={index}
                 style={{ ...Base.delivery }}
             >
+                {/* <DataTable.Header>
+                    <DataTable.Title>ID</DataTable.Title>
+                    <DataTable.Title>Produkt</DataTable.Title>
+                    <DataTable.Title>Antal</DataTable.Title>
+                    <DataTable.Title>Datum</DataTable.Title>
+                    <DataTable.Title>Kommentar</DataTable.Title>
+                </DataTable.Header>
+
+                <DataTable.Row>
+                    <DataTable.Cell>{item.id}</DataTable.Cell>
+                    <DataTable.Cell>{item.product_name}</DataTable.Cell>
+                    <DataTable.Cell>{item.amount}</DataTable.Cell>
+                    <DataTable.Cell>{item.delivery_date}</DataTable.Cell>
+                    <DataTable.Cell>{item.comment}</DataTable.Cell>
+                </DataTable.Row> */}
                 <Text style={{ ...Typography.label }}> ID: {item.id} </Text>
                 <Text style={{ ...Typography.label }}> Produkt: {item.product_name} </Text>
                 <Text style={{ ...Typography.label }}> Antal: {item.amount} </Text>

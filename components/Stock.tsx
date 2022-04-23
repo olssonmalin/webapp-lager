@@ -4,6 +4,8 @@ import { Text, View, StyleSheet } from 'react-native';
 import config from "../config/config.json";
 import productModel from "../models/products";
 import { Base, Typography } from '../styles';
+import { DataTable } from 'react-native-paper';
+
 import {
   useFonts,
   // Roboto_100Thin,
@@ -41,17 +43,22 @@ function StockList({ products, setProducts }) {
 
   // const list = products.map((product, index) => <Text style={styles.stocklist} key={index} > {product.name} - {product.stock}</Text >);
   const list = products.map((product, index) => {
-    return <Text
+    return <DataTable.Row
       key={index}
       style={{ ...Typography.normal }}
     >
-      {product.name} - {product.stock}
-    </Text>
+      <DataTable.Cell>{product.name}</DataTable.Cell>
+      <DataTable.Cell>{product.stock}</DataTable.Cell>
+    </DataTable.Row>
   });
   return (
-    <View>
+    <DataTable>
+      <DataTable.Header>
+        <DataTable.Title>Produkt</DataTable.Title>
+        <DataTable.Title>Antal</DataTable.Title>
+      </DataTable.Header>
       {list}
-    </View>
+    </DataTable>
   );
 }
 
