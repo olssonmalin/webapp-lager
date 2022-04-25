@@ -21,22 +21,33 @@ import Stock from './components/Stock';
 import Home from './components/Home';
 import Pick from './components/Pick';
 import Deliveries from './components/Deliveries';
+import Auth from './components/auth/Auth';
+import Invoices from './components/Invoices';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Base, Typography } from './styles';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import authModel from "./models/auth";
 
 const Tab = createBottomTabNavigator();
 const routeIcons = {
   "Lager": "home",
   "Plock": "list",
+  "Leverans": "archive-outline",
+  "Faktura": "book-outline",
+  "Logga in": "key"
 };
 
 export default function App() {
   const [products, setProducts] = useState<any[]>([]);
   const [deliveries, setDeliveries] = useState<any[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+
+  useEffect(async () => {
+    setIsLoggedIn(await authModel.loggedIn());
+  }, []);
 
 
   let [fontsLoaded] = useFonts({
@@ -45,10 +56,6 @@ export default function App() {
   }); if (!fontsLoaded) {
     return <></>;
   }
-
-  {/* <Text style={{ color: '#45062e', fontSize: 42, fontFamily: 'Roboto_500Medium', letterSpacing: 1.2, marginBottom: 5, marginTop: 5 }}>Lager-Appen</Text>
-        <Image source={candy} style={{ width: 420, height: 190 }} />
-        <Stock /> */}
 
   return (
     <SafeAreaView style={Base.base}>
@@ -74,6 +81,12 @@ export default function App() {
           <Tab.Screen name="Leverans">
             {() => <Deliveries products={products} setProducts={setProducts} deliveries={deliveries} setDeliveries={setDeliveries} />}
           </Tab.Screen>
+          {isLoggedIn ?
+            <Tab.Screen name="Faktura" component={Invoices} /> :
+            <Tab.Screen name="Logga in">
+              {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
+            </Tab.Screen>
+          }
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
