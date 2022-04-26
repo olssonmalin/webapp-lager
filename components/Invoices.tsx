@@ -1,10 +1,26 @@
-import { View, Text } from "react-native";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Typography, Base } from "../styles";
+import authModel from "../models/auth";
+import InvoiceList from './InvoiceList';
+import InvoiceForm from './InvoiceForm';
+
+const Stack = createNativeStackNavigator();
 
 export default function Invoices(props) {
+
+    async function logout() {
+        await authModel.logout();
+        props.setIsLoggedIn(false);
+    }
+
     return (
-        <View style={{ ...Base.base }}>
-            <Text style={{ ...Typography.header2 }}>Faktura</Text>
-        </View>
+        <Stack.Navigator initialRouteName="List">
+            <Stack.Screen name="List">
+                {(screenProps) => <InvoiceList {...screenProps} logout={logout} invoices={props.invoices} setInvoices={props.setInvoices} />}
+            </Stack.Screen>
+            <Stack.Screen name="Form">
+                {(screenProps) => <InvoiceForm {...screenProps} allOrders={props.allOrders} setAllOrders={props.setAllOrders} />}
+            </Stack.Screen>
+        </Stack.Navigator>
     )
 }

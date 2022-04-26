@@ -43,7 +43,10 @@ const routeIcons = {
 export default function App() {
   const [products, setProducts] = useState<any[]>([]);
   const [deliveries, setDeliveries] = useState<any[]>([]);
+  const [invoices, setInvoices] = useState<any[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+  const [allOrders, setAllOrders] = useState([]);
+
 
   useEffect(async () => {
     setIsLoggedIn(await authModel.loggedIn());
@@ -76,13 +79,15 @@ export default function App() {
             {() => <Home products={products} setProducts={setProducts} />}
           </Tab.Screen>
           <Tab.Screen name="Plock">
-            {() => <Pick products={products} setProducts={setProducts} />}
+            {() => <Pick products={products} setProducts={setProducts} allOrders={allOrders} setAllOrders={setAllOrders} />}
           </Tab.Screen>
           <Tab.Screen name="Leverans">
             {() => <Deliveries products={products} setProducts={setProducts} deliveries={deliveries} setDeliveries={setDeliveries} />}
           </Tab.Screen>
           {isLoggedIn ?
-            <Tab.Screen name="Faktura" component={Invoices} /> :
+            <Tab.Screen name="Faktura">
+              {() => <Invoices setIsLoggedIn={setIsLoggedIn} invoices={invoices} setInvoices={setInvoices} allOrders={allOrders} setAllOrders={setAllOrders} />}
+            </Tab.Screen> :
             <Tab.Screen name="Logga in">
               {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
             </Tab.Screen>

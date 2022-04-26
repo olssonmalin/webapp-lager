@@ -34,18 +34,42 @@ const orders = {
                 });
         }
 
+        await this.changeStatus(order, 200)
+        // var orderPick = {
+        //     id: order.id,
+        //     name: order.name,
+        //     status_id: 200,
+        //     api_key: config.api_key
+        // };
 
-        var orderPick = {
+        // console.log(orderPick);
+
+        // fetch(`${config.base_url}/orders`, {
+        //     body: JSON.stringify(orderPick),
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     method: 'PUT'
+        // })
+        //     .then(function (response) {
+
+        //     });
+
+        // TODO: Ändra status för ordern till packad
+    },
+
+    changeStatus: async function changeStatus(order: Partial<Order>, status = 100) {
+        var orderInfo = {
             id: order.id,
             name: order.name,
-            status_id: 200,
+            status_id: status,
             api_key: config.api_key
         };
 
-        console.log(orderPick);
+        console.log(orderInfo);
 
         fetch(`${config.base_url}/orders`, {
-            body: JSON.stringify(orderPick),
+            body: JSON.stringify(orderInfo),
             headers: {
                 'content-type': 'application/json'
             },
@@ -55,7 +79,6 @@ const orders = {
 
             });
 
-        // TODO: Ändra status för ordern till packad
     }
 };
 

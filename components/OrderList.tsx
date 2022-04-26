@@ -5,9 +5,9 @@ import orderModel from "../models/orders";
 import { Base, Typography } from '../styles';
 
 
-export default function OrderList({ route, navigation }) {
+export default function OrderList({ route, navigation, allOrders, setAllOrders }) {
     const { reload } = route.params || false;
-    const [allOrders, setAllOrders] = useState([]);
+    // const [allOrders, setAllOrders] = useState([]);
 
 
     if (reload) {
