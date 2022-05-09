@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from "react";
 import { View, Text, Button } from "react-native";
-import config from "./../config/config.json";
-import orderModel from "../models/orders";
-import { Base, Typography } from '../styles';
+import { Base, Typography } from "../../styles";
 
+import orderModel from '../../models/orders';
 
-export default function OrderList({ route, navigation, allOrders, setAllOrders }) {
+export default function ShipList({ route, navigation, allOrders, setAllOrders }) {
     const { reload } = route.params || false;
-    // const [allOrders, setAllOrders] = useState([]);
 
 
     if (reload) {
@@ -22,14 +20,8 @@ export default function OrderList({ route, navigation, allOrders, setAllOrders }
         reloadOrders();
     }, []);
 
-    // useEffect(() => {
-    //     fetch(`${config.base_url}/orders?api_key=${config.api_key}`)
-    //         .then(response => response.json())
-    //         .then(result => setAllOrders(result.data));
-    // }, []);
-
     const listOfOrders = allOrders
-        .filter(order => order.status === "Ny")
+        .filter(order => order.status_id >= 200)
         .map((order, index) => {
             return <Button
                 title={order.name}
@@ -44,8 +36,7 @@ export default function OrderList({ route, navigation, allOrders, setAllOrders }
 
     return (
         <View style={Base.base}>
-            <Text style={Typography.normal}>Ordrar redo att plockas</Text>
+            <Text style={Typography.normal}>Ordrar redo all skickas, klicka för att se detaljer.</Text>
             {listOfOrders}
-        </View>
-    );
-}
+        </View>)
+};

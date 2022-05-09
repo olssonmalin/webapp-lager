@@ -30,6 +30,7 @@ import { Base, Typography } from './styles';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import authModel from "./models/auth";
+import Ship from './components/ship/Ship';
 
 const Tab = createBottomTabNavigator();
 const routeIcons = {
@@ -92,6 +93,9 @@ export default function App() {
               {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
             </Tab.Screen>
           }
+          <Tab.Screen name="Ship">
+            {() => <Ship allOrders={allOrders} setAllOrders={setAllOrders} />}
+          </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
