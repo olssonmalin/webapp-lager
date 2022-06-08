@@ -29,6 +29,7 @@ import { Base, Typography } from './styles';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import FlashMessage from 'react-native-flash-message';
 import authModel from "./models/auth";
 import Ship from './components/ship/Ship';
 
@@ -99,6 +100,7 @@ export default function App() {
         </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
+      <FlashMessage position="top" />
     </SafeAreaView >
   );
 }

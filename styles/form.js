@@ -9,7 +9,7 @@ export const input = {
     borderWidth: 1,
     padding: 10,
     borderColor: "#45062e",
-    borderRadius: 3,
+    borderRadius: 3
 };
 
 export const logIn = {
