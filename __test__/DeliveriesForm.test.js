@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react-native';
 import DeliveryForm from '../components/DeliveryForm';
+jest.useFakeTimers();
+
 
 // jest.mock("../components/DeliveryForm", () => "DeliveryForm");
 

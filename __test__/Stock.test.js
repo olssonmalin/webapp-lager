@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react-native';
 import Stock from '../components/Stock';
+jest.useFakeTimers();
 
 jest.mock("../components/StockList", () => "StockList");
 

@@ -3,6 +3,7 @@ import StockList from '../components/StockList';
 import { DataTable } from 'react-native-paper';
 
 jest.useFakeTimers();
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 // jest.mock("../components/StockList", () => "StockList");
 
